@@ -1,0 +1,11 @@
+\BOOKMARK [1][-]{section.1}{Introduzione teorica}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Equazioni di Kohn-Sham}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Local density approximation \(LDA\)}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Potenziali esterno e di Hartree}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Metodi numerici}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Algoritmo di diagonalizzazione}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Autoconsistenza}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Risultati}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Unit\340 ridotte}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Informazioni generali sul software}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Discussione dei risultati}{section.3}% 11
