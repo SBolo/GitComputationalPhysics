@@ -1,4 +1,4 @@
-NAME = KS.c
+NAME = KS.cpp
 
 prova: $(NAME) 
-	gcc $(NAME) -O3 -g -lgsl -lgslcblas -I/opt/local/include -L/opt/local/lib -o prog
+	g++ $(NAME) -O3 -g -lgsl -lgslcblas -I/opt/local/include -L/opt/local/lib -o prog

@@ -19,7 +19,7 @@
 #define GSL(F,x) (*((F)->function))(x,(F)->params)
 #define STEP (2.5e-2)
 #define RMAX (25.) //dimensione mesh
-#define P_NUM (40.) //numero di elettroni nella sfera
+#define P_NUM (2.) //numero di elettroni nella sfera
 #define RS_Li (4.) //raggio di Wiegner Seitz per cominciare
 #define EPSILON (1.e-3) //precisione sulla somma degli autovalori
 #define EDIM (6) //dimensione array energie
@@ -76,7 +76,6 @@ double simpson_normalize(double *psi, int N) { //normalizzazione
 	
 }
 
-
 double integrate(double *g, double j, double h) { //array, primo estremo (primo indice), secondo estremo (secondo indice)
 
     int i;
@@ -88,7 +87,6 @@ double integrate(double *g, double j, double h) { //array, primo estremo (primo 
     
 	return risultato;
 }
-
 
 double guess(double x, void *params) { //distribuzione di densità iniziale
     
@@ -245,23 +243,6 @@ void solve(schrodinger *D, gsl_function *CE, gsl_function *C, gsl_function *H, d
         D->psi[i] /= normalization;
         D->rho_tmp[i] += (1.*deg) * D->psi[i];
     }
- /*
-    //derivata dell'autostato
-        tmp_derivate[0] = l * pow(STEP,l-1.);
-    
-        for( i = 1; i < (D->dim-1); i++ ) {
-            tmp_derivate[i] = ( sqrt(D->psi[i+1]) - sqrt(D->psi[i-1]) ) / (2.*STEP);
-        }
-    
-        tmp_derivate[D->dim-1] = tmp[D->dim-2];
-    
-    for( i = 0; i < D->dim; i++ ) {
-        D->dpsi2[i] += -1./2. * deg * pow( tmp_derivate[i], 2. );
-    }
-    
-    //fine derivata dell'autostato
-    
-*/
 }
 
 
@@ -296,11 +277,11 @@ void self_consistence(gsl_function *CE, gsl_function *C, gsl_function *H, schrod
   
     //     arr l  n  deg
     SOLVING(0, 0, 0, 2); //1s
-    SOLVING(1, 1, 0, 6); //1p
-    SOLVING(2, 2, 0, 10); //1d
-    SOLVING(3, 0, 1, 2); //2s
-    SOLVING(4, 3, 0, 14); //1f
-    SOLVING(5, 1, 1, 6); //2p
+//    SOLVING(1, 1, 0, 6); //1p
+//    SOLVING(2, 2, 0, 10); //1d
+//    SOLVING(3, 0, 1, 2); //2s
+//    SOLVING(4, 3, 0, 14); //1f
+//    SOLVING(5, 1, 1, 6); //2p
     
     //in definitiva salviamo il temporaneo dentro rho e ricalcoliamo l'energia dello stato
         for(i = 0; i< D->dim; i++ ) {
@@ -323,11 +304,11 @@ void self_consistence(gsl_function *CE, gsl_function *C, gsl_function *H, schrod
                 
                 //     arr l  n  deg
                 SOLVING(0, 0, 0, 2); //1s
-                SOLVING(1, 1, 0, 6); //1p
-                SOLVING(2, 2, 0, 10); //1d
-                SOLVING(3, 0, 1, 2); //2s
-                SOLVING(4, 3, 0, 14); //1f
-                SOLVING(5, 1, 1, 6); //2p
+//                SOLVING(1, 1, 0, 6); //1p
+//                SOLVING(2, 2, 0, 10); //1d
+//                SOLVING(3, 0, 1, 2); //2s
+//                SOLVING(4, 3, 0, 14); //1f
+//                SOLVING(5, 1, 1, 6); //2p
                 
                 //in definitiva salviamo il temporaneo dentro rho e ricalcoliamo l'energia dello stato
                 for( i = 0; i < D->dim; i++ ) {
@@ -480,25 +461,3 @@ int main() {
     
     return 0;
 }
-
-/*double eigen_sum(gsl_function *CE, gsl_function *C, gsl_function *H, schrodinger *D) {
- 
- int i;
- double t0, c, ce, u;
- double coulomb[D->dim], hartree[D->dim], corr_ex[D->dim];
- 
- for( i = 0; i < D->dim; i++ ) {
- D->dpsi2[i] *= D->rho[i];
- coulomb[i] = GSL(C,i*STEP) * D->rho[i];
- hartree[i] = GSL(H,i*STEP) * D->rho[i];
- corr_ex[i] = GSL(CE,i*STEP) * D->rho[i];
- }
- 
- t0 = simpson_normalize(D->dpsi2, D->dim); //media dell'energia cinetica
- c = simpson_normalize(coulomb, D->dim);
- ce = simpson_normalize(corr_ex, D->dim);
- u = simpson_normalize(hartree, D->dim);
- 
- return ( t0 + c + ce + u );
- 
- }*/
