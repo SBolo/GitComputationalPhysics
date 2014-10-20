@@ -42,11 +42,11 @@ dove $F[\rho]$ è il \emph{funzionale di Levy}, definito come
 \begin{equation}
 F[\rho] := \min_{\psi \to \rho} \langle \psi | \hat{T} + V_{int} | \psi \rangle
 \end{equation}
-in cui il minimo ha da intendersi come il minimo sulle funzioni d'onda che generano una determinata densità $\rho$. In particolare, per densità $\rho$ di un sistema a $N$ corpi intendiamo
+dove il minimo è da intendersi come il minimo sulle funzioni d'onda che generano una determinata densità $\rho$. In particolare, per densità $\rho$ di un sistema a $N$ corpi intendiamo la solita densità a $N$-corpi normalizzata al numero di particelle:
 \[
 \rho(\textbf{r}) = N \int d^3r_2\ldots d^3r_N |\psi(\textbf{r}_1,\textbf{r}_2,\ldots ,\textbf{r}_N)|^2
 \]
-L'efficacia del teorema di Kohn-Hoenberg risiede nel fatto che il funzionale densità ci permette di dimenticare i dettagli dell'Hamiltoniana, ma al prezzo di una scrittura approssimata di $F[\rho]$ che è impredicibile. 
+L'efficacia del teorema di Kohn-Hoenberg risiede nel fatto che il funzionale densità ci permette di dimenticare i dettagli dell'Hamiltoniana, ma al prezzo di una scrittura approssimata di $F[\rho]$. Infatti, la conoscenza della forma esatta di tale funzionale è equivalente alla conoscenza della soluzione del problema: in questo senso una scrittura analitica di $F[\rho]$ è impredicibile.
 \\
 Per un sistema fermionico, Kohn e Sham hanno proposto la scrittura del funzionale energia, genericamente inteso come
 \[
@@ -60,7 +60,7 @@ dove con $T_0(\rho)$ intendiamo l'energia cinetica di un sistema di particelle n
 \[
 U(\textbf{r}) = \int d^3r' \rho(\textbf{r}')v(|\textbf{r}-\textbf{r}'|)
 \]
-e con $E_{xc}$ è l'\emph{energia di scambio-correlazione}. A partire da questo funzionale energia possiamo ricavare le \emph{equazioni di Kohn-Sham} tramite un approccio variazionale, fissando il numero di particelle nel sistema attraverso un moltiplicatore di Lagrange $\varepsilon_i$ e calcolando
+e con $E_{xc}$ l'\emph{energia di scambio-correlazione}. A partire da questo funzionale energia possiamo ricavare le \emph{equazioni di Kohn-Sham} tramite un approccio variazionale, fissando il numero di particelle nel sistema attraverso un moltiplicatore di Lagrange $\varepsilon_i$ e calcolando
 \begin{equation}
 \frac{\delta}{\delta \varphi_i^*} ( E[\rho] - \varepsilon_i N) = 0
 \end{equation}
@@ -68,7 +68,7 @@ intendendo con $\varphi_i$ le funzioni di singola particella del ground state de
 \[
 \Psi(\textbf{r}_1,\ldots \textbf{r}_N) = \det S(\varphi_1, \ldots , \varphi_N)
 \]
-Il fatto che i moltiplicatori di Lagrange siano diversi per ogni funzione d'onda di singola particella è dovuto al fatto che i fermioni, al contrario dei bosoni, non occupano tutti un singolo stato, ma piuttosto si dispongono su stati a diverse energie: teniamo conto di questo effetto attribuendo a ciascuna $\varphi_i$ un diverso moltiplicatore $\varepsilon_i$. Si ottiene così:
+Il fatto che i moltiplicatori di Lagrange siano diversi per ogni funzione d'onda di singola particella è dovuto al fatto che i fermioni, al contrario dei bosoni, non occupano tutti un singolo stato, ma piuttosto si dispongono su stati a diverse energie: teniamo conto di questo effetto attribuendo a ciascuna $\varphi_i$ un diverso moltiplicatore $\varepsilon_i$. Si ottiengono così le \emph{equazioni di Kohn-Sham}:
 \begin{equation}
 -\frac{\hbar^2}{2m}\nabla^2\varphi_i(\textbf{r}) + V_{ext}(\textbf{r})\varphi_i(\textbf{r}) + \left( \int d^3r' \rho(\textbf{r})v(|\textbf{r}-\textbf{r}'|) \right)\varphi_i(\textbf{r}) + \frac{\partial E_{xc}(\rho(\textbf{r}))}{\partial \rho}\varphi_i(\textbf{r}) = \varepsilon_i \varphi_i(\textbf{r})
 \end{equation} 
@@ -81,7 +81,7 @@ ovvero che, una volta ricavata numericamente la corretta densità del sistema è
 E[\rho] = \sum_{i=1}^N \varepsilon_i + E_{xc}(\rho) - \left\langle \frac{\partial E_{xc}}{\partial \rho} \right\rangle - \frac{1}{2}\langle U \rangle
 \end{equation}
 \subsection{Local density approximation (LDA)}
-Per un sistema la cui densità varia lentamente l'energia di scambio-correlazione può essere espressa come
+Per un sistema la cui densità varia lentamente con la distanza, l'energia di scambio-correlazione può essere espressa come
 \begin{equation}
 E_{xc}(\rho) = \int d^3r \rho(\textbf{r}) \varepsilon_{xc}(\rho(\textbf{r}))
 \end{equation}
@@ -89,7 +89,7 @@ dove $\varepsilon_{xc}(\rho(\textbf{r}))$ è l'energia di scambio-correlazione p
 \begin{equation}
 \varepsilon_{xc}(\rho(\textbf{r})) = \varepsilon_{x}(\rho(\textbf{r})) + \varepsilon_c(\rho(\textbf{r})) 
 \end{equation}
-che possono essere calcolati il primo esplicitamente, il secondo attraverso l'utilizzo di metodi Monte Carlo. A riguardo del termine di scambio, se supponiamo che i fermioni nel sistema (tridimensionale) interagiscano tramite potenziale coulombiano
+che possono essere calcolati il primo esplicitamente e il secondo attraverso l'utilizzo di metodi Monte Carlo. A riguardo del termine di scambio, se supponiamo che i fermioni nel sistema (tridimensionale) interagiscano tramite potenziale coulombiano
 \[
 v(r_{ij}) = \frac{e^2}{|\textbf{r}_i-\textbf{r}_j|}
 \]
@@ -105,7 +105,7 @@ otteniamo
 \begin{equation}
 \varepsilon_c(\rho(\textbf{r})) = -\frac{0.44}{7.8 +r_s}
 \end{equation}
-In questo approccio, l'equazione \eqref{7} può essere riscritta in una maniera più semplice. Otteniamo
+In questo approccio, l'equazione \eqref{7} può essere riscritta in una maniera più semplice. Otteniamo infatti
 \[
 \begin{split}
 E[\rho] &= \sum_{i=1}^N \varepsilon_i - \frac{1}{2}\int d^3r U(\textbf{r}) \rho(\textbf{r}) - \int d^3r \frac{\partial E_{xc}(\rho)}{\partial \rho}\rho(\textbf{r}) + \int d^3r \varepsilon_{xc}(\rho)\rho(\textbf{r}) \\
@@ -122,7 +122,7 @@ Per quanto riguarda il potenziale di interazione (Hartree) è possibile svolgere
 \begin{equation}
 U(\textbf{r}) = \int d^3r' \frac{\rho(\textbf{r}')}{|\textbf{r}-\textbf{r}'|} = \frac{4\pi}{r} \int _0^r dr' \rho(r') r'^2 + 4\pi \int _r^{+\infty}dr' \rho(r') r'
 \end{equation}
-Il potenziale esterno, invece, possiamo pensarlo come generato da una sfera carica di raggio $R_c$ e densità di carica uniforme
+Il potenziale esterno, invece, può essere pensato come generato da una sfera carica di raggio $R_c$ e densità di carica uniforme
 \[
 \rho_+ = \frac{3Ne}{4\pi R_c^3}
 \]
@@ -151,7 +151,7 @@ Possiamo discretizzare la derivata seconda sulla griglia sviluppando in serie di
 \psi(x_{i+1}) = \psi(x_i) + \frac{d\psi(x_i)}{dx}\Delta x + \frac{d^2 \psi(x_i)}{dx^2}(\Delta x)^2 + o[(\Delta x)^3] \\
 \psi(x_{i-1}) = \psi(x_i) - \frac{d\psi(x_i)}{dx}\Delta x + \frac{d^2 \psi(x_i)}{dx^2}(\Delta x)^2 + o[(\Delta x)^3]
 \end{align*}
-Sommando membro a membro si ottiene un'espressione discretizzata della derivata precisa all'ordine $\Delta x$:
+Sommando membro a membro si ottiene un'espressione discretizzata della derivata con precisione dell'ordine di $o(\Delta x)$:
 \begin{equation}
 \frac{d^2 \psi(x_i)}{dx^2} = \frac{\psi(x_{i+1}) - 2\psi(x_i) + \psi(x_{i-1})}{(\Delta x)^2} + o(\Delta x)
 \end{equation}
@@ -159,7 +159,7 @@ L'equazione \eqref{14} in forma discretizzata è dunque data da:
 \begin{equation}
 -\frac{\hbar^2}{2m} \left( \frac{\psi(x_{i+1}) - 2\psi(x_i) + \psi(x_{i-1})}{(\Delta x)^2} \right) + V(x_i)\psi(x_i) = E\psi(x_i)
 \end{equation}
-Questa espressione suggerisce una riscrittura dell'equazione in forma matriciale:
+Questa espressione suggerisce la seguente riscrittura dell'equazione in forma matriciale:
 \[
 \begin{split}
 \left( \begin{array}{cccccc}
@@ -179,7 +179,7 @@ V(x_1) + \frac{\hbar^2}{m(\Delta x)^2} & -\frac{\hbar^2}{2m(\Delta x)^2} & 0 & \
 \psi(x_1) \\ \vdots \\ \vdots \\ \psi(x_N)
 \end{array} \right)
 \]
-Conseguentemente, il problema della risoluzione dell'equazione di Schr\"{o}dinger si riduce al problema della diagonalizzazione di una matrice. Esistono delle routine ottimizzate per la risoluzione di problemi agli autovalori, ed in questo caso, per la diagonalizzazione della matrice appena discussa, è stata utilizzata la funzione $gsl\_eigen\_symmv()$ fornita dalla libreria GSL. 
+Conseguentemente, il problema della risoluzione dell'equazione di Schr\"{o}dinger si riduce al problema della diagonalizzazione di una matrice. Esistono delle routine ottimizzate per la risoluzione di problemi agli autovalori, ed in questo caso, per la diagonalizzazione della matrice appena discussa, è stata utilizzata la funzione $eig\_sim()$ fornita dalla libreria \emph{Armadillo} per C++. 
 %\\ \ \\
 %La procedura di diagonalizzazione presenta però un problema fondamentale: il tempo di calcolo scala in maniera non lineare con la dimensione della matrice. Evidentemente l'efficacia del metodo appena sviluppato per la risoluzione dell'equazione di Schr\"{o}dinger è tanto più preciso quanto maggiore è la dimensione della matrice (in quanto, fissato il raggio massimo entro il quale si sceglie di studiare il sistema, maggiore è la dimensione della matrice minore sarà il valore di $\Delta x$), e conseguentemente la precisione dei nostri risultati risulterà fortemente vincolata dai tempi computazionali che siamo disposti ad accettare. In più, le equazioni di Kohn-Sham richiederanno, per essere risolte, una procedura iterativa basata sul metodo autoconsistente, e di conseguenza è fondamentale che la singola iterazione non richieda un ammontare di tempo esagerato. Per studiare il comportamento dell'algoritmo fornito dalla libreria GSL è stata risolta l'equazione di Schr\"{o}dinger per l'oscillatore armonico tridimensionale,
 %\[
@@ -202,35 +202,36 @@ Conseguentemente, il problema della risoluzione dell'equazione di Schr\"{o}dinge
 %\end{figure}
 %Si può notare come, essendo la precisione della soluzione $\Delta x = 0.05$, la differenza tra le due curve non superi mai la soglia imposta dall'incertezza. Conseguentemente, per il proseguo dell'analisi, $D=500$ verrà considerata la dimensione ideale per risolvere l'equazione di Schr\"{o}dinger con il metodo della diagonalizzazione. 
 \subsection{Autoconsistenza}
-Come si può evincere dall'equazione (6), il potenziale di Hartree dipende non solo dalla soluzione dell'equazione di singola particella, ma anche dalla soluzione di quelle di tutti gli altri fermioni nel sistema. Di conseguenza, l'algoritmo che verrà utilizzato per la risoluzione delle equazioni di Kohn-Sham è il seguente:
+Come si può evincere dall'equazione (6), il potenziale di Hartree dipende non solo dalla soluzione dell'equazione di singola particella, ma anche dalla soluzione di quelle di tutti gli altri fermioni nel sistema. Di conseguenza, l'algoritmo utilizzato per la risoluzione delle equazioni di Kohn-Sham è il seguente:
 \begin{enumerate}[i.]
-\item \textbf{Primo step}: fissare una densità \emph{guess} che funga da soluzione di prova per il calcolo del potenziale efficace. In questo caso, come densità guess si può scegliere una funzione che ricorda la distribuzione di Fermi, ovvero la distribuzione che rappresenta il numero medio di occupazione di un sistema di fermioni non interagenti:
-\begin{equation}
+\item \textbf{Primo step}: fissare una densità \emph{guess} che funga da soluzione di prova per il calcolo del potenziale efficace. In questo caso, come densità guess si può scegliere una funzione che ricordi la distribuzione di Fermi, ovvero la distribuzione che rappresenta il numero medio di occupazione di un sistema di fermioni non interagenti:
+\begin{equation}\label{17}
 \rho(r) = \frac{1}{A} \frac{\rho_+}{1+e^{(r-R_c)}}
 \end{equation}
 dove il parametro $A$ viene fissato tramite la normalizzazione
 \[
 N = \int d^3r \rho(r)
 \]
+($\rho_+$ è un parametro di per sè ridondante che può essere incluso nella costante di normalizzazione). 
 \item \textbf{Secondo step}: calcolare il potenziale efficace
 \[
 V_{eff}(r) = V_{ext}(r)+V_{int}(r) + \frac{\partial \varepsilon_{xc}}{\partial \rho}\rho + \varepsilon_{xc}
 \]
-\item \textbf{Terzo step}: risolvere le equazioni di Kohn-Sham per gli stati di singola particella attraverso l'algoritmo di diagonalizzazione: cioè ottenere $\varphi_i$ ed $\varepsilon_i$ per ogni stato occupato. Il numero di equazioni da risolvere dipende chiaramente dal numero di particelle nel sistema che, essendo fermioni, si distribuiranno in stati (più o meno degeneri) ad energie mano a mano più alte. Conseguentemente, è necessario risolvere le equazioni per tutti i momenti angolari che potrebbero entrare in gioco, e successivamente ordinare gli autovalori in maniera da fissare l'ordine di occupazione degli orbitali. 
+\item \textbf{Terzo step}: risolvere le equazioni di Kohn-Sham per gli stati di singola particella attraverso l'algoritmo di diagonalizzazione: cioè ottenere $\varphi_i$ ed $\varepsilon_i$ per ogni stato occupato. Il numero di equazioni da risolvere dipende chiaramente dal numero di particelle nel sistema che, essendo fermioni, si distribuiranno in stati ad energie mano a mano più alte. Conseguentemente, è necessario risolvere le equazioni per tutti i momenti angolari che potrebbero entrare in gioco, e successivamente ordinare gli autovalori in maniera da fissare l'ordine di occupazione degli orbitali. 
 \item \textbf{Terzo step}: calcolare la nuova densità del sistema, ottenuta come
 \begin{equation}
-\rho_{new}(r) = \sum_{\text{stati occupati}} |\varphi_i(r)|^2
+\rho_{new}(r) = \sum_{\text{stati occupati}} d_i|\varphi_i(r)|^2
 \end{equation}
-tenendo conto delle degenerazioni dei singoli stati. A questo punto, una volta selezionato un parametro $\alpha < 1$ adeguatamente piccolo (verrà discussa in seguito la scelta del suo valore), definire
+dove $d_i$ è la degenerazioni dello stato $i$-esimo. Per evitare di incorrere in soluzioni metastabili che impediscano la convergenza è possibile a questo punto scegliere un parametro di ''ammorbidimento'' $\alpha < 1$ adeguatamente piccolo (verrà discussa in seguito la scelta del suo valore), e definire
 \begin{equation}
 \rho_{new}^{(1)}(r) = \alpha \rho_{new}(r) + (1-\alpha)\rho_{old}(r)
 \end{equation}
-(dove, nel caso della prima iterazione $\rho_{old} \equiv \rho_{guess}$) e calcolare la somma degli autovalori $\varepsilon_i$: $\sum_{\text{stati occupati}} \varepsilon_i^{(1)}$.
+(dove, nel caso della prima iterazione $\rho_{old} \equiv \rho_{guess}$) utilizzandolo per calcolare la somma degli autovalori $\varepsilon_i$: $\sum_{\text{stati occupati}} \varepsilon_i^{(1)}$.
 \item \textbf{Quarto step}: verificare la condizione di uscita
 \begin{equation}
 \left| \sum_{i=1}^N \varepsilon_i^{(k)} - \sum_{i=1}^N \varepsilon_i^{(k-1)} \right| < \varepsilon
 \end{equation}
-ovvero verificare se la somma degli autovalori al ciclo k-esimo è uguale, a meno di un $\varepsilon$ fissato, a quella del ciclo precedente. Se questa condizione è soddisfatta, l'iterazione cessa e l'ultim
+ovvero verificare se la somma degli autovalori al ciclo k-esimo è uguale, a meno di un $\varepsilon$ fissato, a quella del ciclo precedente. Se questa condizione è soddisfatta, l'iterazione cessa e si considera raggiunta la convergenza. 
 \end{enumerate}
 
 \section{Risultati}
@@ -247,9 +248,96 @@ dove $a_0$ è il \emph{raggio di Bohr}. In queste unità, l'energia viene calcol
 
 L'esecuzione del programma richiede a scelta di certi parametri (cfr. Autoconsistenza):
 \begin{itemize}
-	\item $R_{max}$: tale parametro rappresenta la lunghezza della griglia numerica scelta per la soluzione del problema. In questo caso, dopo una serie di test preliminari si è scelto $R_{max} = 25$;
-	\item data la precedente discussione sulla dimensione della matrice, da $R_{max}=25$ discende necessariamente $\Delta x = 2.5 \cdot 10^{-2}$. 
-	\item $\varepsilon$: è evidente dal problema che la somma degli autovalori è necessaria solamente ai fini del calcolo dell'energia $E[\rho]$, che calcoliamo attraverso l'equazione $(7)$. Tale equazione è evidentemente dipendente da $\rho$, e conseguentemente la stima di $E[\rho]$ è dipendente dalla precisione con cui conosciamo la densità stessa. 
+\item $r_s$: il raggio di Wiegner-Seitz è stato posto convenzionalmente pari a $r_s=4$ in unità del raggio di Bohr (il valore corrispondente al sodio);
+	\item $R_{max}$: tale parametro rappresenta la lunghezza della griglia numerica scelta per la soluzione del problema. In questo caso, dopo una serie di test preliminari si è scelto $R_{max} = 20$;
+	\item $\Delta x$: fissata la lunghezza della mesh, per ottenere una matrice sufficientemente grande da garantire una diagonalizzazione significativa è stato scelto $\Delta x = 0.015$;
+	\item $\alpha$: il valore di $\alpha$ è stato settato, dopo alcuni test preliminari di convergenza, a $\alpha=0.05$;
+	\item $\varepsilon$: questo parametro fissa la sensibilità sulla convergenza dell'algoritmo e dunque è necessario settarlo in maniera tale da non sovrastimare la precisione del processo computazionale ma contemporaneamente da garantire una convergenza ad un valore sufficientemente stabile. In questo particolare caso è stato scelto $\varepsilon = 10^{-3}$. 
 \end{itemize}
 \subsection{Discussione dei risultati}
+In questo paragrafo verranno mostrati i risultati ottenuti tramite il metodo precedentemente descritto. Cominciamo con le energie del sistema $E[\rho]$ per differenti configurazioni closed-shell:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$N_{fermioni}$ & \emph{Orbitali occupati} & $E[\rho]/N$ $[$H$]$ & $E[\rho]/N$ $[$eV$]$ \\ \hline
+2 & 1s & -0.308 $\pm$ 0.001 & -8.37 $\pm$ 0.01 \\ \hline
+8 & 1s, 1p & -0.675 $\pm$ 0.001 & -18.38 $\pm$ 0.01 \\ \hline
+18 & 1s, 1p, 1d & -1.052 $\pm$ 0.001 & -28.63 $\pm$ 0.01 \\ \hline
+20 & 1s, 1p, 1d, 2s & -1.174 $\pm$ 0.001 & -31.94 $\pm$ 0.01 \\ \hline
+34 & 1s, 1p, 1d, 2s, 1f & -1.653 $\pm$ 0.001 & -44.97 $\pm$ 0.01 \\ \hline
+40 & 1s, 1p, 1d, 2s, 1f, 2p & -1.829 $\pm$ 0.001 & -49.78 $\pm$ 0.01 \\ \hline
+\end{tabular}
+\end{center}\ \\
+Di seguito mostriamo invece i risultati per quanto riguarda la densità, il potenziale di Hartree ed il potenziale di scambio-correlazione ottenuti a convergenza. Tutti i plot mostrano le funzioni ottenute tramite la densità guess \eqref{17} e le conseguenti funzioni a convergenza. Per la densità:
+\newpage
+\begin{figure}[!h]
+\centering
+\subfigure[$N=2$]
+{\includegraphics[scale=0.25]{Img/dens-2}}
+\hspace{3mm}
+\subfigure[$N=8$]
+{\includegraphics[scale=0.25]{Img/dens-8}}
+\subfigure[$N=18$]
+{\includegraphics[scale=0.25]{Img/dens-18}}
+\hspace{3mm}
+\subfigure[$N=20$]
+{\includegraphics[scale=0.25]{Img/dens-20}}
+\subfigure[$N=34$]
+{\includegraphics[scale=0.25]{Img/dens-34}}
+\hspace{3mm}
+\subfigure[$N=40$]
+{\includegraphics[scale=0.25]{Img/dens-40}}
+\caption{Plot delle densità del sistema fermionico nelle diverse configurazioni a shell chiusa}
+\end{figure}\ \\
+Le densità rispecchiano le previsioni sul comportamento del sistema: nel caso di due soli fermioni il picco della densità è ovviamente in $r=0$, in quanto le due particelle sono in onda $s$. Aumentando il numero di shell a disposizione vediamo il massimo allontanarsi da zero attraverso il contributo degli orbitali $1p$ e $1d$ e così via fino alla conformazione più complessa che corrisponde a $N=40$, dove si sommano i contributi di sei differenti orbitali pesati con le rispettive degenerazioni. La figura (f) può essere confrontata con Fig. 2.4 di [1], evidenziando (almeno qualitativamente) un comportamento simile a quello della simulazione di riferimento. 
+\newpage
+\begin{figure}[!h]
+\centering
+\subfigure[$N=2$]
+{\includegraphics[scale=0.25]{Img/h-2}}
+\hspace{3mm}
+\subfigure[$N=8$]
+{\includegraphics[scale=0.25]{Img/h-8}}
+\subfigure[$N=18$]
+{\includegraphics[scale=0.25]{Img/h-18}}
+\hspace{3mm}
+\subfigure[$N=20$]
+{\includegraphics[scale=0.25]{Img/h-20}}
+\subfigure[$N=34$]
+{\includegraphics[scale=0.25]{Img/h-34}}
+\hspace{3mm}
+\subfigure[$N=40$]
+{\includegraphics[scale=0.25]{Img/h-40}}
+\caption{Plot del potenziale di Hartree del sistema fermionico nelle diverse configurazioni a shell chiusa}
+\end{figure}\ \\
+\newpage
+\begin{figure}[!h]
+\centering
+\subfigure[$N=2$]
+{\includegraphics[scale=0.25]{Img/ce-2}}
+\hspace{3mm}
+\subfigure[$N=8$]
+{\includegraphics[scale=0.25]{Img/ce-8}}
+\subfigure[$N=18$]
+{\includegraphics[scale=0.25]{Img/ce-18}}
+\hspace{3mm}
+\subfigure[$N=20$]
+{\includegraphics[scale=0.25]{Img/ce-20}}
+\subfigure[$N=34$]
+{\includegraphics[scale=0.25]{Img/ce-34}}
+\hspace{3mm}
+\subfigure[$N=40$]
+{\includegraphics[scale=0.25]{Img/ce-40}}
+\caption{Plot del potenziale di scambio-correlazione del sistema fermionico nelle diverse configurazioni a shell chiusa}
+\end{figure}\ \\
+
+Infine mostriamo un immagine dell'andamento delle energie di singola particella corrispondenti alle diverse configurazioni a shell chiusa (immagine che può essere confrontata con Fig. 2.3 (a) di [1]):
+\newpage
+
+\begin{center}
+\includegraphics[scale=0.4]{Img/spe}
+\end{center}
+Possiamo osservare che le energie di singola particelle non mostrano un comportamento a shell particolarmente marcato in corrispondenza dei numeri magici: questo rimarca il fatto che le equazioni di Kohn-Sham (quantomeno in approssimazione di densità locale) non sono uno strumento adatto alla previsione di energie di singola particella, quanto piuttosto al calcolo dell'energia complessiva del sistema. 
+
+
 \end{document}

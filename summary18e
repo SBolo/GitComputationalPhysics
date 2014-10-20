@@ -1,0 +1,14 @@
+-------------------------
+SUMMARY OF THE SIMULATION
+-------------------------
+#Number of particles: 18
+#Dimension of the matrix: 1000
+#Precision on the eigenvalues: 0.001
+#Correct sum of eigenvalues: -1.5795
+#Correct single-level energies: 1s = -0.192 H, -5.222 eV
+                                1p = -0.159 H, -4.327 eV
+                                1d = -0.121 H, -3.286 eV
+                                2s = 0.000 H, 0.000 eV
+                                1f = 0.000 H, 0.000 eV
+                                2p = 0.000 H, 0.000 eV
+#Correct energy per particle: -1.049

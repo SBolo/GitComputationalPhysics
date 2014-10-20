@@ -19,7 +19,7 @@
 #define GSL(F,x) (*((F)->function))(x,(F)->params)
 #define STEP (2.5e-2)
 #define RMAX (25.) //dimensione mesh
-#define P_NUM (2.) //numero di elettroni nella sfera
+#define P_NUM (18.) //numero di elettroni nella sfera
 #define RS_Li (4.) //raggio di Wiegner Seitz per cominciare
 #define EPSILON (1.e-3) //precisione sulla somma degli autovalori
 #define EDIM (6) //dimensione array energie
@@ -277,8 +277,8 @@ void self_consistence(gsl_function *CE, gsl_function *C, gsl_function *H, schrod
   
     //     arr l  n  deg
     SOLVING(0, 0, 0, 2); //1s
-//    SOLVING(1, 1, 0, 6); //1p
-//    SOLVING(2, 2, 0, 10); //1d
+    SOLVING(1, 1, 0, 6); //1p
+    SOLVING(2, 2, 0, 10); //1d
 //    SOLVING(3, 0, 1, 2); //2s
 //    SOLVING(4, 3, 0, 14); //1f
 //    SOLVING(5, 1, 1, 6); //2p
@@ -304,8 +304,8 @@ void self_consistence(gsl_function *CE, gsl_function *C, gsl_function *H, schrod
                 
                 //     arr l  n  deg
                 SOLVING(0, 0, 0, 2); //1s
-//                SOLVING(1, 1, 0, 6); //1p
-//                SOLVING(2, 2, 0, 10); //1d
+                SOLVING(1, 1, 0, 6); //1p
+                SOLVING(2, 2, 0, 10); //1d
 //                SOLVING(3, 0, 1, 2); //2s
 //                SOLVING(4, 3, 0, 14); //1f
 //                SOLVING(5, 1, 1, 6); //2p
