@@ -1,0 +1,1 @@
+Il file per il calcolo della norma L2 è diverso in quanto primo prototipo del programma con cui, già l'anno scorso durante il corso, avevo calcolato e salvato le varie norme. Dunque, nonostante non sia la via più elegante per fare le cose, ho lasciato i due programmi separati. 

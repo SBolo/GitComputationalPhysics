@@ -1,0 +1,29 @@
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Plot of \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {1.1}\unskip \@@italiccorr )}}}}}{1}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Plot of \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {1.2}\unskip \@@italiccorr )}}}}}{1}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$u(x,t=10)$ with $c_f=0.5$}}}{2}{subfigure.1.4}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$u(x,t=20)$ with $c_f=0.5$}}}{2}{subfigure.1.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$u(x,t=10)$ with $c_f=1$}}}{3}{subfigure.1.6}
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$u(x,t=20)$ with $c_f=1$}}}{3}{subfigure.1.6}
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {$u(x,t=0.05)$ with $c_f=0.5,1$}}}{4}{subfigure.1.8}
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {$u(x,t=1)$ with $c_f=0.5,1$}}}{4}{subfigure.1.8}
+\contentsline {subfigure}{\numberline {(i)}{\ignorespaces {$u(x,t=10)$ with $c_f=0.5$}}}{5}{subfigure.1.12}
+\contentsline {subfigure}{\numberline {(j)}{\ignorespaces {$u(x,t=20)$ with $c_f=0.5$}}}{5}{subfigure.1.12}
+\contentsline {subfigure}{\numberline {(k)}{\ignorespaces {$u(x,t=10)$ with $c_f=1$}}}{5}{subfigure.1.12}
+\contentsline {subfigure}{\numberline {(l)}{\ignorespaces {$u(x,t=20)$ with $c_f=1$}}}{5}{subfigure.1.12}
+\contentsline {subfigure}{\numberline {(m)}{\ignorespaces {$u(x,t)$ with $c_f=0.5$ and $\Delta x = 0.1$}}}{5}{subfigure.1.14}
+\contentsline {subfigure}{\numberline {(n)}{\ignorespaces {$u(x,t=10)$ with $c_f=0.5$ and $\Delta x = 0.01$}}}{5}{subfigure.1.14}
+\contentsline {subfigure}{\numberline {(o)}{\ignorespaces {$u(x,t=10)$ with $c_f=1$ and $\Delta x = 0.1$}}}{6}{subfigure.1.16}
+\contentsline {subfigure}{\numberline {(p)}{\ignorespaces {$u(x,t=20)$ with $c_f=1$}}}{6}{subfigure.1.16}
+\contentsline {subfigure}{\numberline {(q)}{\ignorespaces {$u(x,t=10)$ with $c_f=0.5$}}}{6}{subfigure.1.20}
+\contentsline {subfigure}{\numberline {(r)}{\ignorespaces {$u(x,t=20)$ with $c_f=0.5$}}}{6}{subfigure.1.20}
+\contentsline {subfigure}{\numberline {(s)}{\ignorespaces {$u(x,t=10)$ with $c_f=1$}}}{6}{subfigure.1.20}
+\contentsline {subfigure}{\numberline {(t)}{\ignorespaces {$u(x,t=20)$ with $c_f=1$}}}{6}{subfigure.1.20}
+\contentsline {subfigure}{\numberline {(u)}{\ignorespaces {$u(x,t=10)$ with $c_f=0.5$}}}{7}{subfigure.1.24}
+\contentsline {subfigure}{\numberline {(v)}{\ignorespaces {$u(x,t=20)$ with $c_f=0.5$}}}{7}{subfigure.1.24}
+\contentsline {subfigure}{\numberline {(w)}{\ignorespaces {$u(x,t=10)$ with $c_f=1$}}}{7}{subfigure.1.24}
+\contentsline {subfigure}{\numberline {(x)}{\ignorespaces {$u(x,t=20)$ with $c_f=1$}}}{7}{subfigure.1.24}
+\contentsline {subfigure}{\numberline {(y)}{\ignorespaces {$u(x,t=10)$ with $c_f=0.5$}}}{8}{subfigure.1.26}
+\contentsline {subfigure}{\numberline {(z)}{\ignorespaces {$u(x,t=20)$ with $c_f=0.5$}}}{8}{subfigure.1.26}
+\contentsline {figure}{\numberline {1}{\ignorespaces Two subfigures.}}{9}{figure.1}
+\contentsline {subfigure}{\numberline {1.27}{\ignorespaces {First}}}{9}{figure.1}
+\contentsline {subfigure}{\numberline {1.28}{\ignorespaces {Second}}}{9}{figure.1}

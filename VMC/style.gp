@@ -1,0 +1,1 @@
+plot energy.txt w l

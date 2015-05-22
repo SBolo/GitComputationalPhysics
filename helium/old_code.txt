@@ -1,0 +1,110 @@
+double MonteCarlo::local_energy(double *Rx, double *Ry, double *Rz) {
+    //local energy for n 1d uncoupled harmonic oscillators
+    double a = prms[0];
+    double b = prms[1];
+    double rx_ij, ry_ij, rz_ij, r_ij12;
+    double b5 = b * b * b * b * b, l = LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA;
+    double b10 = b5*b5;
+    double sum = 0., tot = 0.;
+    double r2, r_ij, r_ij7, r_ij6;
+
+    //psi_T = f*g dove f = psi_HO e g = psi_Jastrow = psi_J
+    //nabla^2psi_T/psi_T = nabla^2f/f + nabla^2g/g + 2 nablaf/f*nablag/g
+
+    for( int i = 0; i < particles_num; i++ ) {
+        r2 =  Rx[i]*Rx[i] + Ry[i]*Ry[i] + Rz[i]*Rz[i];
+        sum += ( 3. * a + r2 * (1./2. - 2. * a * a) ); //nabla^2f/f+V_HO
+
+        for( int j = 0; j < particles_num; j++ ) {
+            if( j != i ) {
+                rx_ij = Rx[j] - Rx[i];
+                ry_ij = Ry[j] - Ry[i];
+                rz_ij = Rz[j] - Rz[i];
+                r_ij12 = r_ij6 * r_ij6;
+
+                r_ij = sqrt( rx_ij * rx_ij + ry_ij * ry_ij + rz_ij * rz_ij );
+                r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+                r_ij7 = r_ij6 * r_ij;
+
+                sum += - (25./8.) * b10 / (r_ij6 * r_ij6) + 5. * b5 / r_ij7 ; //nabla^2g/g
+                sum -= (5./2.) * b5 * a * ( Rx[i] * rx_ij + Ry[i] * ry_ij + Rz[i] * rz_ij ) / r_ij7;
+                 //nablaf/f*nablag/g
+            }
+        //}
+    //}
+
+    //for( int i = 0; i < particles_num; i++ ) { //V_LJ
+        //for( int j = 0; j < i; j++ ) {
+            if( j < i ) {
+                //r_ij = sqrt( (Rx[i] - Rx[j]) * (Rx[i] - Rx[j]) + (Ry[i] - Ry[j]) * (Ry[i] - Ry[j]) + (Rz[i] - Rz[j]) * (Rz[i] - Rz[j]) );
+                //r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+                sum += BETA * ( l * l / r_ij12 - l / r_ij6 );
+            }
+        }
+    }
+
+    return sum;
+}
+
+//double MonteCarlo::local_energy(double *Rx, double *Ry, double *Rz) {
+//    //local energy for n 1d uncoupled harmonic oscillators
+//    double a = prms[0];
+//    double b = prms[1];
+//    double rx_ij, ry_ij, rz_ij, r_ij12;
+//    double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0, sum = 0, sum_check = 0;
+//    double b5 = b * b * b * b * b, l = LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA;
+//    double b10 = b5*b5;
+//    double r2, r_ij, r_ij7, r_ij6, rj, ri, lj6;
+
+//    //psi_T = f*g dove f = psi_HO e g = psi_Jastrow = psi_J
+//    //nabla^2psi_T/psi_T = nabla^2f/f + nabla^2g/g + 2 nablaf/f*nablag/g
+
+
+//    for( int i = 0; i < particles_num; i++ ) {
+//        for( int j = 0; j < particles_num; j++ ) {
+//            if( j != i ) {
+//                rx_ij = Rx[j] - Rx[i];
+//                ry_ij = Ry[j] - Ry[i];
+//                rz_ij = Rz[j] - Rz[i];
+
+//                r_ij = sqrt( rx_ij * rx_ij + ry_ij * ry_ij + rz_ij * rz_ij );
+//                r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+//                r_ij7 = r_ij6 * r_ij;
+
+//                sum_check += ( Rx[i] * rx_ij + Ry[i] * ry_ij + Rz[i] * rz_ij ) / r_ij7;
+//                 //nablaf/f*nablag/g
+//            }
+//        }
+//    }
+
+
+
+//    for( int i = 0; i < particles_num; i++ ) {
+//        r2 = Rx[i]*Rx[i] + Ry[i]*Ry[i] + Rz[i]*Rz[i];
+//        ri =  sqrt(r2);
+//        sum1 += r2;
+
+//        for( int j = 0; j < i; j++ ) {
+//            rj = sqrt( Rx[j]*Rx[j] + Ry[j]*Ry[j] + Rz[j]*Rz[j] );
+//            r_ij = sqrt( (Rx[i]-Rx[j])*(Rx[i]-Rx[j]) + (Ry[i]-Ry[j])*(Ry[i]-Ry[j]) + (Rz[i]-Rz[j])*(Rz[i]-Rz[j]) );
+//            r_ij6 = r_ij * r_ij * r_ij;
+//            r_ij6 *= r_ij6;
+//            r_ij7 = r_ij6 * r_ij;
+//            lj6 = l/r_ij6;
+
+//            sum2 += (1./r_ij6) * ( ri + rj );
+//            sum3 += (1./r_ij6) * (1./r_ij6);
+//            sum4 += (1./r_ij6) * (1./r_ij);
+//            sum5 += lj6 * (- 1. + lj6);
+//        }
+//    }
+
+//    sum = 3. * a * particles_num + (- 2. * a * a + 0.5) * sum1 - 5. * b5 * a * sum2 - 25./4. * b10 * sum3
+//            + 10 * b5 * sum4 + BETA * sum5;
+
+//        printf("sum1 = %g, sum2 = %g, sum_check = %g, sum3 = %g, sum4 = %g, sum5 = %g, sum = %g\n", sum1, sum2, sum_check, sum3, sum4, sum5, sum);
+
+
+//    return sum;
+//}
+//------------------------------------------------------------------------------

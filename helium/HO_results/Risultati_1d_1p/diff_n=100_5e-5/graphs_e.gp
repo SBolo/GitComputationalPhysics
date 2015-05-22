@@ -1,0 +1,5 @@
+pl "energy_error_7.txt" w l title "Energia"
+set key top left box font "default,13"
+set xl "Cicli DMC" font "default,20"
+set yl "E [nat u]" font "default,20"
+set tics font "default,15"

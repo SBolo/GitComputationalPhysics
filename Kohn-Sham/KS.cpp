@@ -24,8 +24,8 @@ using namespace arma;
 #define GSL(F,x) (*((F)->function))(x,(F)->params)
 #define STEP (1.5e-2) //step di integrazione
 #define RMAX (20.) //dimensione mesh
-#define P_NUM (18.) //numero di elettroni nella sfera
-#define SHELL_NUM (3) //numero di shell
+#define P_NUM (8.) //numero di elettroni nella sfera
+#define SHELL_NUM (2) //numero di shell
 #define RS_Li (4.) //raggio di Wiegner Seitz per cominciare
 #define EPSILON (1.e-3) //precisione sulla somma degli autovalori
 #define EDIM (6) //dimensione array energie
@@ -93,26 +93,27 @@ double guess(double x, void *params) { //distribuzione di densità iniziale
     
     schrodinger * D = (schrodinger *)params;
     double radius = D->sphere_radius;
+
+
     double rho_plus = 3. / (4. * M_PI * pow(radius,3.));
     double mu = 1.; //deve essere piccolo: questo valore va approssimativamente bene
     
     double rho = rho_plus / (1. + exp(mu * (x - radius) ) );
     
-    return rho; //va integrata per essere normalizzata
+    return 1./(1. + exp(mu * (x - radius))); //va integrata per essere normalizzata
     
 }
 
 
-double correlation_exchange(double r , schrodinger *D){
+double correlation_exchange(double r , schrodinger *D) {
     
 	int i = (int) (r/STEP);
 	double rho_r = D->rho[i];
     
-	double denom =  7.8 + pow((3.0 / (4.0 * M_PI * rho_r)), 1.0 / 3.0);
 	double r_s = pow((3.0 / (4.0 * M_PI * rho_r)), 1.0 / 3.0);
 	double term = pow((3.0 * rho_r / M_PI), 1.0 / 3.0);
     
-	return  -0.44 / (7.8 + r_s) - 0.44 / 3.0 * r_s / ((7.8 + r_s) * (7.8 + r_s)) - term;
+    return  - 0.44 / (7.8 + r_s) /*- 0.44 / 3.0 * r_s / ((7.8 + r_s) * (7.8 + r_s))*/ - term;
 }
 
 
@@ -260,6 +261,7 @@ void self_consistence(schrodinger *D, vec &energies, vec &tmp2, vec &tmp, double
     }
 
         e_new = 2.*energies(0) + 6.*energies(1) + 2.*energies(2) + 10.*energies(3) + 14.*energies(4) + 6.*energies(5); //40e
+        //e_new = energies(0);
 
 }
 
@@ -366,7 +368,7 @@ void printPot(schrodinger *D, char *filen) {
     pt = fopen(filen,"w");
 
         for( int i = 0; i < D->dim; i++ ) {
-           fprintf( pt, "%g \t %g \t %g\n", i*STEP, hartree(i*STEP, D), correlation_exchange(i*STEP, D) );
+           fprintf( pt, "%g \t %g \t %g \t %g\n", i*STEP, coulomb(i*STEP,D), hartree(i*STEP, D), correlation_exchange(i*STEP, D) );
            //potenziale autoconsistente
         }
 
@@ -454,7 +456,7 @@ int main() {
         printf("\t-> Starting the self-consistent iteration\n");
     
             //##########
-            SC_lopp(&D, EDIM);
+            //SC_lopp(&D, EDIM);
             //#########
     
         printf("\n");
@@ -472,6 +474,6 @@ int main() {
 
         printf("\t-> Final potentials correctly printed\n\n");
 
-   
+
     return 0;
 }

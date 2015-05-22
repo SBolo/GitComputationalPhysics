@@ -1,0 +1,89 @@
+double local_energy(double *Rx, double *Ry, double *Rz, double *var_param, int particle_num) {
+    //local energy for n 1d uncoupled harmonic oscillators
+    double a = var_param[0];
+    double b = var_param[1];
+    double b5 = b * b * b * b * b, l = LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA;
+    double sum = 0., tot = 0.;
+    double r, r_ij, r_ij7, r_ij6;
+
+    //psi_T = f*g dove f = psi_HO e g = psi_Jastrow = psi_J
+    //nabla^2psi_T/psi_T = nabla^2f/f + nabla^2g/g + 2 nablaf/f*nablag/g
+
+    for( int i = 0; i < particle_num; i++ ) {
+        r = sqrt( Rx[i]*Rx[i] + Ry[i]*Ry[i] + Rz[i]*Rz[i] );
+        sum += ( 3. * a + r * r * (1./2. - 2. * a * a) ); //nabla^2f/f+V_HO
+        //printf("r = %g, i = %d, x = %g, y = %g, z = %g\n", r, i, Rx[i], Ry[i], Rz[i]);
+        //printf("sum_ho = %g\n", sum);
+
+        for( int j = 0; j < particle_num; j++ ) {
+            if( j != i ) {
+                r_ij = sqrt( (Rx[j] - Rx[i]) * (Rx[j] - Rx[i]) + (Ry[j] - Ry[i]) * (Ry[j] - Ry[i]) + (Rz[j] - Rz[i]) * (Rz[j] - Rz[i]) );
+                r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+                r_ij7 = r_ij6 * r_ij;
+
+                sum += - (25./8.) * b5 * b5 / (r_ij6 * r_ij6) + 5. * b5 / r_ij7; //nabla^2g/g
+                sum -= (5./2.) * b5 * a * ( Rx[i] * (Rx[j] - Rx[i]) + Ry[i] * (Ry[j] - Ry[i]) + Rx[i] * (Rz[j] - Rz[i]) ) / r_ij7;
+                 //nablaf/f*nablag/g
+            }
+        }
+    }
+
+    //printf("sum = %g\n", sum);
+
+    for( int i = 0; i < particle_num; i++ ) { //V_LJ
+        for( int j = i+1; j < particle_num; j++ ) {
+            r_ij = sqrt( (Rx[i] - Rx[j]) * (Rx[i] - Rx[j]) + (Ry[i] - Ry[j]) * (Ry[i] - Ry[j]) + (Rz[i] - Rz[j]) * (Rz[i] - Rz[j]) );
+            r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+            sum += BETA * ( l * l / (r_ij6 * r_ij6) - l / r_ij6 );
+        }
+    }
+    //printf("Sum alla fine = %g\n", sum);
+    return sum;
+}
+//------------------------------------------------------------------------------
+
+double pseudo_force(double *Rx, double *Ry, double *Rz, double *var_param, int particle, int direction, int particle_num) {
+    //pseudo force for the harmonic oscillator
+    double a = var_param[0];
+    double b = var_param[1];
+    double b5 = b * b * b * b * b, sum = 0., r_ij, r_ij7;
+
+    if( direction == 0 ) {
+        for( int i = 0; i < particle_num; i++ ) {
+            if( i != particle ) {
+                r_ij = sqrt( (Rx[particle] - Rx[i]) * (Rx[particle] - Rx[i]) + (Ry[particle] - Ry[i]) *
+                        (Ry[particle] - Ry[i]) + (Rz[particle] - Rz[i]) * (Rz[particle] - Rz[i]) );
+                r_ij7 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+                sum -= (5./2.) * b5 * (Rx[i] - Rx[particle]) / r_ij7;
+            }
+        }
+        return ( -  2. * a * Rx[particle] + sum ) * DTAU;
+
+    } else if (direction == 1 ) {
+        for( int i = 0; i < particle_num; i++ ) {
+            if( i != particle ) {
+                r_ij = sqrt( (Rx[particle] - Rx[i]) * (Rx[particle] - Rx[i]) + (Ry[particle] - Ry[i]) *
+                        (Ry[particle] - Ry[i]) + (Rz[particle] - Rz[i]) * (Rz[particle] - Rz[i]) );
+                r_ij7 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+                sum -= (5./2.) * b5 * (Ry[i] - Ry[particle]) / r_ij7;
+            }
+        }
+        return ( -  2. * a * Ry[particle] + sum ) * DTAU;
+
+    } else if( direction == 2 ) {
+        for( int i = 0; i < particle_num; i++ ) {
+            if( i != particle ) {
+                r_ij = sqrt( (Rx[particle] - Rx[i]) * (Rx[particle] - Rx[i]) + (Ry[particle] - Ry[i]) *
+                        (Ry[particle] - Ry[i]) + (Rz[particle] - Rz[i]) * (Rz[particle] - Rz[i]) );
+                r_ij7 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+                sum -= (5./2.) * b5 * (Rz[i] - Rz[particle]) / r_ij7;
+            }
+        }
+        return ( -  2. * a * Rz[particle] + sum ) * DTAU;
+
+    } else {
+        printf("Not a direction");
+        exit(0);
+    }
+}
+//------------------------------------------------------------------------------

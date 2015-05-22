@@ -1,0 +1,67 @@
+double local_energy(double *Rx, double *Ry, double *Rz, double *var_param, int particle_num) {
+    //local energy for n 1d uncoupled harmonic oscillators
+    double a = var_param[0];
+    double b = var_param[1];
+    double b5 = b * b * b * b * b;
+    double sum = 0, r2, r_ij, prod = 1., r_ij5, r_ij6, tot = 0, l = LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA * LAMBDA;
+
+    for( int i = 0; i < particle_num; i++ ) {
+        r2 = Rx[i]*Rx[i] + Ry[i]*Ry[i] + Rz[i]*Rz[i];
+        sum += ( 3. * a + r2 * (1./2. - 2. * a * a) );
+
+        for( int j = 0; j < i; j++ ) { //product over i<j
+            r_ij = sqrt( (Rx[i] - Rx[j]) * (Rx[i] - Rx[j]) + (Ry[i] - Ry[j]) * (Ry[i] - Ry[j]) + (Rz[i] - Rz[j]) * (Rz[i] - Rz[j]) );
+            r_ij5 = r_ij * r_ij * r_ij * r_ij * r_ij;
+            prod *= -1./2. * ( 15. * b5 / (r_ij5 * r_ij) - 60. * b5 / r_ij5 + 25. * b5 * b5 / ( r_ij5 * r_ij5 )  );
+        }
+        sum += prod;
+    }
+
+    for( int i = 0; i < particle_num; i++ ) {
+        for( int j = 0; j < i; j++ ) {
+            r_ij = (Rx[i] - Rx[j]) * (Rx[i] - Rx[j]) + (Ry[i] - Ry[j]) * (Ry[i] - Ry[j]) + (Rz[i] - Rz[j]) * (Rz[i] - Rz[j]);
+            r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+            tot += BETA * ( l * l / (r_ij6 * r_ij6) - l / r_ij6 );
+        }
+    }
+    return (sum + tot);
+}
+
+double pseudo_force(double *Rx, double *Ry, double *Rz, double *var_param, int particle, int direction, int particle_num) {
+    //pseudo force for the harmonic oscillator
+    double a = var_param[0];
+    double b = var_param[1];
+    double b5 = b * b * b * b * b, prod = 1., r_ij, r_ij6;
+
+    if( direction == 0 ) {
+        for( int i = 0; i < particle; i++ ) {
+            r_ij = (Rx[particle] - Rx[i]) * (Rx[particle] - Rx[i]) + (Ry[particle] - Ry[i]) *
+                    (Ry[particle] - Ry[i]) + (Rz[particle] - Rz[i]) * (Rz[particle] - Rz[i]);
+            r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+            prod *= 5. * b5 * ( Rx[particle] - Rx[i]) / r_ij6;
+        }
+        return ( -  2. * a * Rx[particle] + prod ) * DTAU;
+
+    } else if (direction == 1 ) {
+        for( int i = 0; i < particle; i++ ) {
+            r_ij = (Rx[particle] - Rx[i]) * (Rx[particle] - Rx[i]) + (Ry[particle] - Ry[i]) *
+                    (Ry[particle] - Ry[i]) + (Rz[particle] - Rz[i]) * (Rz[particle] - Rz[i]);
+            r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+            prod *= 5. * b5 * ( Ry[particle] - Ry[i]) / r_ij6;
+        }
+        return ( -  2. * a * Ry[particle] + prod ) * DTAU;
+
+    } else if( direction == 2 ) {
+        for( int i = 0; i < particle; i++ ) {
+            r_ij = (Rx[particle] - Rx[i]) * (Rx[particle] - Rx[i]) + (Ry[particle] - Ry[i]) *
+                    (Ry[particle] - Ry[i]) + (Rz[particle] - Rz[i]) * (Rz[particle] - Rz[i]);
+            r_ij6 = r_ij * r_ij * r_ij * r_ij * r_ij * r_ij;
+            prod *= 5. * b5 * ( Rz[particle] - Rz[i]) / r_ij6;
+        }
+        return ( -  2. * a * Rz[particle] + prod ) * DTAU;
+
+    } else {
+        printf("Not a direction");
+        exit(0);
+    }
+}

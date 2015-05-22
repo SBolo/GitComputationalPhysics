@@ -1,0 +1,6 @@
+pl "energy_error_10_03.txt" u 1:2 w l title "Energia"
+set key top box font "default,13"
+set xl "Cicli DMC" font "default,20"
+set yl "Energia [nat u]" font "default,20"
+set xtics font "default,15"
+set tics font "default,15"
